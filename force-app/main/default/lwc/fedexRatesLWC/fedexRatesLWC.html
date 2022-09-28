@@ -1,0 +1,42 @@
+<template>
+<div class="slds-border_right slds-box slds-border_left">
+    <div  class="slds-box slds-theme_shade">
+    <lightning-icon icon-name="standard:asset_object" size="small"></lightning-icon>
+    <span class="slds-var-p-horizontal_medium  slds-text-heading_medium slds-text-title_bold">Fedex Shippment Rates</span>
+    </div>
+    <div>
+    <lightning-layout horizontal-align="space">
+        <lightning-layout-item padding="around-small">
+            <div class="custom-box">
+                <lightning-input type="text" label="From Postal Code"  name="fromPostalCode" ></lightning-input>
+                <lightning-input type="text" label="From Country Code" name="fromCountryCode" value="US"></lightning-input>
+                <lightning-input type="text" label="Weight in lbs" name="weightInlbs"></lightning-input>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <div class="custom-box">
+                <lightning-input type="text" label="To Postal Code"  name="toPostalCode"></lightning-input>
+                <lightning-input type="text" label="To Country Code" name="toCountryCode" value="US"></lightning-input>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+   <div class="slds-align_absolute-center"> <lightning-button label="Calculate Rate" onclick={handleClick} class="slds-m-left_x-small"></lightning-button></div>
+   <div  class="slds-var-p-vertical_large"> </div>
+   <div if:true={resReceived} class="slds-box slds-text-heading_medium slds-text-title_bold"> 
+    <span >Fedex offers following Services at related Shippment Rates</span>
+    <lightning-layout pull-to-boundary="medium">
+        <lightning-layout-item flexibility="auto" padding="horizontal-medium">
+            <ul if:true={resMap} class="scroller">
+                <template for:each={resMap} for:item="map">
+                    <li key={map.key}>{map.key} --> {map.value}</li>
+                </template>
+            </ul>
+        </lightning-layout-item>
+        </lightning-layout>
+
+
+
+   </div>
+   </div>
+</div>
+</template>
